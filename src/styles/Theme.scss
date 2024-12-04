@@ -1,0 +1,41 @@
+body {
+    --primary-color: var(--primary-color);
+    --secondary-color: var(--secondary-color);
+    --font-color: var(--font-color);
+    --bg-color: var(--bg-color);
+    --heading-color: var(--heading-color);
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+
+body[data-theme='light'] {
+    --primary-color: #302ae6;
+    --secondary-color: #9a97f316;
+    --font-color: #424242;
+    --bg-color: #f0f1ff;
+    --heading-color: #4e4e4482;
+}
+
+body[data-theme='dark'] {
+    --primary-color: #9a97f3;
+    --secondary-color: #1e1e2d;
+    --font-color: #e1e1ff;
+    --bg-color: #161625;
+    --heading-color: #818cab;
+}
+
+.dark_mode {
+    position: absolute;
+    right: 21px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dark_mode_input {
+    display: none;
+}
+
+.dark_mode_label {
+    cursor: pointer !important;
+}

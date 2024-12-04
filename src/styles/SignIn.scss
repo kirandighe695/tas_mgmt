@@ -1,0 +1,27 @@
+.container {
+    margin-top: 50px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.title {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #3f51b5;
+}
+
+.textField {
+    margin-bottom: 20px;
+}
+
+.button {
+    margin-top: 20px;
+}
+
+.errorMessage {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
