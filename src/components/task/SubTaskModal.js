@@ -10,17 +10,20 @@ const SubTaskModal = ({ open, onClose, taskId }) => {
 
     useEffect(() => {
         const savedSubtasks = JSON.parse(localStorage.getItem('subtasks')) || [];
-        setSubtasks(savedSubtasks);
-    }, []);
+        const filteredSubtasks = savedSubtasks.filter(subtask => subtask.taskId === taskId);
+        setSubtasks(filteredSubtasks);
+    }, [taskId]);
 
     const onUpdateSubtasks = (updatedSubtasks) => {
         setSubtasks(updatedSubtasks);
-        localStorage.setItem('subtasks', JSON.stringify(updatedSubtasks));
+        const allSubtasks = JSON.parse(localStorage.getItem('subtasks')) || [];
+        const newSubtasks = allSubtasks.filter(subtask => subtask.taskId !== taskId).concat(updatedSubtasks);
+        localStorage.setItem('subtasks', JSON.stringify(newSubtasks));
     };
 
     const handleAddOrUpdateSubtask = () => {
         if (currentSubtask.index === null) {
-            onUpdateSubtasks([...subtasks, { title: currentSubtask.title, taskId  }]);
+            onUpdateSubtasks([...subtasks, { title: currentSubtask.title, taskId }]);
         } else {
             const updatedSubtasks = subtasks.map((subtask, index) =>
                 index === currentSubtask.index ? { title: currentSubtask.title, taskId: subtask.taskId } : subtask

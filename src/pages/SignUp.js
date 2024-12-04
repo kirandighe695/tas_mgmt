@@ -8,7 +8,7 @@ import {
     Box,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
 import '../styles/SignUp.scss';
 import signupImage from '../assets/bg-login.avif';
 
@@ -24,14 +24,24 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
-    
+
         const payload = {
             name,
             email,
             password,
             userId: uuidv4(),
         };
-    
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userExists = users.some(user => user.email === email);
+
+        if (userExists) {
+            setSnackbarMessage('This email is already registered. Please use a different email.');
+            setSnackbarOpen(true);
+            setLoading(false);
+            return;
+        }
+
         try {
             const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
                 method: 'POST',
@@ -40,15 +50,17 @@ const SignUp = () => {
                 },
                 body: JSON.stringify(payload),
             });
-    
+
             if (response.ok) {
                 const users = JSON.parse(localStorage.getItem('users')) || [];
                 users.push(payload);
                 localStorage.setItem('users', JSON.stringify(users));
-    
+
                 setSnackbarMessage('Sign up successful!');
                 setSnackbarOpen(true);
-                navigate('/');
+                setTimeout(() => {
+                    navigate('/');
+                }, 1000);
             } else {
                 const errorData = await response.json();
                 setSnackbarMessage(`Sign up failed: ${errorData.message || 'Please try again.'}`);

@@ -21,9 +21,11 @@ const SignIn = () => {
             localStorage.setItem('userName', user.name);
             localStorage.setItem('userEmail', user.email);
             localStorage.setItem('userId', user.userId);
-
             setSnackbarOpen(true);
-            navigate('/all-task');
+            setTimeout(() => {
+                navigate('/all-task');
+            }, 1000);
+
         } else {
             setErrorMessage('Invalid email or password. Please try again.');
         }
