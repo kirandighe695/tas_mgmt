@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import NotFound from './components/NotFound';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import './styles/Theme.scss';
 
