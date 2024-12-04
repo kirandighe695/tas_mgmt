@@ -102,10 +102,7 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
         onClose();
       }}>
 
-        <Box
-          className="box"
-          padding={2}>
-
+        <Box className="box" padding={2} sx={{ width: '500px' }}>
           <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant="h6" component="h2">
               {initialData ? "Edit Task" : "Add New Task"}
@@ -128,7 +125,7 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
 
           <Typography
             sx={{
-              maxHeight: '350px',
+              maxHeight: '340px',
               overflowY: 'auto',
               scrollbarWidth: 'none',
               zIndex: '99999'
@@ -137,11 +134,10 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
             <Grid container spacing={2}>
               <Grid item xs={12} container spacing={2}>
                 <Grid item xs={6}>
-                  <InputLabel className="text-value font14">Title</InputLabel>
                   <TextField
                     placeholder="Enter Title"
                     name="title"
-                    className="mt-0 inputs"
+                    className="mt-2 inputs"
                     InputProps={{
                       classes: {
                         input: "text-value font14",
@@ -158,7 +154,26 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
                 </Grid>
 
                 <Grid item xs={6}>
-                  <InputLabel className="text-value font14">Status</InputLabel>
+                  <TextField
+                    type="date"
+                    name="endDate"
+                    fullWidth
+                    className="mt-2 inputs"
+                    value={task.endDate}
+                    onChange={handleChange}
+                    margin="normal"
+                    InputProps={{
+                      classes: {
+                        input: "text-value font14",
+                      },
+                    }}
+                    required
+                  />
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} container spacing={2}>
+                <Grid item xs={4}>
                   <TextField
                     name="status"
                     fullWidth
@@ -181,30 +196,8 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
                     <option value="Completed" className="text-dark">Completed</option>
                   </TextField>
                 </Grid>
-              </Grid>
 
-              <Grid item xs={12} container spacing={2}>
-                <Grid item xs={6}>
-                  <InputLabel className="text-value font14">End Date</InputLabel>
-                  <TextField
-                    type="date"
-                    name="endDate"
-                    fullWidth
-                    className="mt-0 inputs"
-                    value={task.endDate}
-                    onChange={handleChange}
-                    margin="normal"
-                    InputProps={{
-                      classes: {
-                        input: "text-value font14",
-                      },
-                    }}
-                    required
-                  />
-                </Grid>
-
-                <Grid item xs={6}>
-                  <InputLabel className="text-value font14">Priority</InputLabel>
+                <Grid item xs={4}>
                   <TextField
                     fullWidth
                     name="priority"
@@ -225,11 +218,8 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
                     <option value="High" className="text-dark">High</option>
                   </TextField>
                 </Grid>
-              </Grid>
 
-              <Grid item xs={12} container spacing={2} alignItems="center">
-                <Grid item xs={6}>
-                  <InputLabel className="text-value font14">Category</InputLabel>
+                <Grid item xs={4}>
                   <TextField
                     fullWidth
                     name="category"
@@ -256,11 +246,11 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
               </Grid>
 
               <Grid item xs={12} container spacing={2} alignItems="center">
-                <Grid item xs={9}>
-                  <InputLabel className="text-value font14">Add Category</InputLabel>
+                <Grid item xs={10}>
+                  <InputLabel className="text-value font16">Add Category</InputLabel>
                   <TextField
                     placeholder="Enter Category Name"
-                    className="inputs font14"
+                    className="inputs font14 mt-1"
                     fullWidth
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
@@ -272,8 +262,8 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
                   ></TextField>
                 </Grid>
 
-                <Grid item xs={3}>
-                  <Button variant="outlined" className="mt-4" onClick={handleSaveCategory} sx={{ height: '55px', width: '90px', marginLeft: '7px' }}>
+                <Grid item xs={2}>
+                  <Button variant="outlined" className="mt-4" onClick={handleSaveCategory} sx={{ height: '55px', width: '60px'}}>
                     {editingCategoryId ? "Update" : "Add"}
                   </Button>
                 </Grid>

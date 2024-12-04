@@ -11,11 +11,11 @@ const ConfirmationLogout = ({ open, onClose, onConfirm }) => {
                         Are you sure you want to Logout ?
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{marginRight: '16px', marginTop: '-15px'}}>
                     <Button onClick={onClose} variant="outlined">
                         No
                     </Button>
-                    <Button onClick={onConfirm} variant="contained" className="mr-3">
+                    <Button onClick={onConfirm} variant="contained">
                         Yes
                     </Button>
                 </DialogActions>

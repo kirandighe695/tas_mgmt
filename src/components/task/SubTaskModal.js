@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, TextField, List, ListItem, ListItemText, IconButton, Typography, InputLabel, Dialog, Box } from "@mui/material";
+import { Button, TextField, List, ListItem, ListItemText, IconButton, Typography, Dialog, Box } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SubTaskModal = ({ open, onClose }) => {
+const SubTaskModal = ({ open, onClose, taskId }) => {
     const [subtasks, setSubtasks] = useState([]);
     const [currentSubtask, setCurrentSubtask] = useState({ title: '', index: null });
 
@@ -20,10 +20,10 @@ const SubTaskModal = ({ open, onClose }) => {
 
     const handleAddOrUpdateSubtask = () => {
         if (currentSubtask.index === null) {
-            onUpdateSubtasks([...subtasks, { title: currentSubtask.title }]);
+            onUpdateSubtasks([...subtasks, { title: currentSubtask.title, taskId  }]);
         } else {
             const updatedSubtasks = subtasks.map((subtask, index) =>
-                index === currentSubtask.index ? { title: currentSubtask.title } : subtask
+                index === currentSubtask.index ? { title: currentSubtask.title, taskId: subtask.taskId } : subtask
             );
             onUpdateSubtasks(updatedSubtasks);
         }
@@ -41,7 +41,7 @@ const SubTaskModal = ({ open, onClose }) => {
 
     return (
         <Dialog open={open} onClose={onClose}>
-            <Box className='box' padding={2}>
+            <Box className='box' padding={2} sx={{ width: '400px' }}>
                 <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography sx={{ fontSize: '20px', fontWeight: '500' }}>Add SubTask</Typography>
                     <IconButton
@@ -54,10 +54,9 @@ const SubTaskModal = ({ open, onClose }) => {
                         <CloseIcon className="text-value" />
                     </IconButton>
                 </Typography>
-                <InputLabel className="text-value font14">SubTask Title</InputLabel>
                 <TextField
                     placeholder="Enter Subtask Title"
-                    className="inputs"
+                    className="inputs mt-2"
                     InputProps={{
                         classes: {
                             input: "text-value font14",
@@ -76,10 +75,10 @@ const SubTaskModal = ({ open, onClose }) => {
                         <ListItem key={index}>
                             <ListItemText primary={subtask.title} />
                             <IconButton onClick={() => handleEditSubtask(index)} className="text-value font14">
-                                <EditIcon />
+                                <EditIcon sx={{ color: '#0096FF' }} />
                             </IconButton>
                             <IconButton onClick={() => handleDeleteSubtask(index)} className="text-value font14">
-                                <DeleteIcon />
+                                <DeleteIcon sx={{ color: 'red' }} />
                             </IconButton>
                         </ListItem>
                     ))}
