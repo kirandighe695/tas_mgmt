@@ -106,8 +106,8 @@ const Header = ({ activeTab, onTabChange }) => {
                 <span>Logout</span>
                 <LogoutIcon fontSize="small" />
               </MenuItem>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span className="ml-3">Theme</span>
+              <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                <span>Theme</span>
                 <Switch
                   onClick={toggleTheme}
                   name="themeToggle"

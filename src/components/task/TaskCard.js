@@ -50,6 +50,8 @@ const TaskCard = ({ task, onAction }) => {
     switch (status.toLowerCase()) {
       case "pending":
         return "#b3b335";
+      case "ongoing":
+        return "#87CEEB";
       case "completed":
         return "green";
       default:
@@ -73,6 +75,8 @@ const TaskCard = ({ task, onAction }) => {
   const getProgressValue = (status) => {
     switch (status.toLowerCase()) {
       case "pending":
+        return 0;
+      case "ongoing":
         return 50;
       case "completed":
         return 100;
@@ -81,18 +85,42 @@ const TaskCard = ({ task, onAction }) => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+
+  const isEndDateApproaching = (endDate) => {
+    const currentDate = new Date();
+    const taskEndDate = new Date(endDate);
+    const timeDifference = taskEndDate - currentDate;
+    const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+
+    return daysDifference >= 0 && daysDifference <= 2;
+  };
+
   return (
     <>
-      <Card className="task-card mt-3">
+      <Card className={`task-card mt-0 ${isEndDateApproaching(task.endDate) && task.status.toLowerCase() !== 'completed' ? 'highlight' : ''}`}>
         <CardContent>
           <FormControlLabel
             control={
               <Checkbox
                 color="success"
-                onChange={(e) => onAction(e.target.checked ? "complete" : "incomplete", task.id)}
+                checked={task.status === 'Completed'}
+                onChange={(e) => {
+                  if (task.status === 'Completed') {
+                    onAction("incomplete", task.id);
+                  } else {
+                    onAction("complete", task.id);
+                  }
+                }}
               />
             }
-            sx={{ float: "right", marginTop: "-25px", marginRight: "-22px" }}
+            sx={{ float: "right", marginTop: "-5px", marginRight: "-22px" }}
           />
 
           <Tooltip title={task.title}>
@@ -130,7 +158,7 @@ const TaskCard = ({ task, onAction }) => {
           <Typography sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography>
               <Typography variant="body2" sx={{ marginTop: '5px' }}>Created date : {task.createdOn}</Typography>
-              <Typography variant="body2" sx={{ marginTop: '5px' }}>End date : {task.endDate}</Typography>
+              <Typography variant="body2" sx={{ marginTop: '5px' }}>End date : {formatDate(task.endDate)}</Typography>
             </Typography>
 
             <div style={{ position: 'sticky', top: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>
@@ -178,6 +206,7 @@ const TaskCard = ({ task, onAction }) => {
         onClose={handleCloseSubtasksDialog}
         subtasks={subtasks}
         onUpdateSubtasks={handleUpdateSubtasks}
+        taskId={task.id}
       />
     </>
   );
