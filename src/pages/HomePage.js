@@ -133,13 +133,7 @@ const HomePage = ({ tab = 0 }) => {
       </Box>
 
       <Typography
-        className="content"
-        sx={{
-          maxHeight: '420px',
-          overflowY: 'auto',
-          padding: '10px',
-          scrollbarWidth: 'none'
-        }}>
+        className="content">
         {displayedTasks?.length === 0 ? (
           <NoTasksPlaceholder onAddTask={handleAddTask} />
         ) : (
