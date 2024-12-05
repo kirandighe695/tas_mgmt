@@ -74,19 +74,49 @@ const useTasks = () => {
 
   const toggleTaskStatus = (taskId) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === taskId
-          ? { ...task, status: task.status === "Pending" ? "Completed" : "Pending" }
-          : task
-      )
+      prev.map((task) => {
+        if (task.id === taskId) {
+          let newStatus;
+          switch (task.status) {
+            case "Pending":
+              newStatus = "Ongoing";
+              break;
+            case "Ongoing":
+              newStatus = "Completed";
+              break;
+            case "Completed":
+              newStatus = "Pending";
+              break;
+            default:
+              newStatus = "Pending";
+          }
+          return { ...task, status: newStatus };
+        }
+        return task;
+      })
     );
 
     const allTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    const updatedTasks = allTasks.map((task) =>
-      task.id === taskId
-        ? { ...task, status: task.status === "Pending" ? "Completed" : "Pending" }
-        : task
-    );
+    const updatedTasks = allTasks.map((task) => {
+      if (task.id === taskId) {
+        let newStatus;
+        switch (task.status) {
+          case "Pending":
+            newStatus = "Ongoing";
+            break;
+          case "Ongoing":
+            newStatus = "Completed";
+            break;
+          case "Completed":
+            newStatus = "Pending";
+            break;
+          default:
+            newStatus = "Pending";
+        }
+        return { ...task, status: newStatus };
+      }
+      return task;
+    });
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 

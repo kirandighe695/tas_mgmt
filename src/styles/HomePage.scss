@@ -15,6 +15,12 @@
     display: flex;
 }
 
+.select{
+    background-color: transparent !important;
+    color: var(--text-color);
+    outline: none;
+}
+
 .search {
     background-color: var(--background-color);
     color: var(--text-color);

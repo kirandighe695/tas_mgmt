@@ -193,6 +193,7 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
                     required>
                     <option value="" className="text-dark">Select Status</option>
                     <option value="Pending" className="text-dark">Pending</option>
+                    <option value="Ongoing" className="text-dark">Ongoing</option>
                     <option value="Completed" className="text-dark">Completed</option>
                   </TextField>
                 </Grid>
@@ -263,7 +264,7 @@ const TaskModal = ({ isOpen, onClose, onSave, initialData }) => {
                 </Grid>
 
                 <Grid item xs={2}>
-                  <Button variant="outlined" className="mt-4" onClick={handleSaveCategory} sx={{ height: '55px', width: '60px'}}>
+                  <Button variant="outlined" className="mt-4" onClick={handleSaveCategory} sx={{ height: '55px', width: '60px' }}>
                     {editingCategoryId ? "Update" : "Add"}
                   </Button>
                 </Grid>

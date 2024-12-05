@@ -80,7 +80,7 @@ const HomePage = ({ tab = 0 }) => {
       />
 
       <Box sx={{ paddingRight: '16px', marginTop: '6px', display: 'flex', justifyContent: 'end', alignItems: 'center', flexWrap: 'wrap' }}>
-        <select onChange={(e) => onFilterChange('category', e.target.value)} style={{ margin: '8px 10px', border: 'none', cursor: 'pointer' }}>
+        <select onChange={(e) => onFilterChange('category', e.target.value)} style={{ margin: '8px 10px', border: 'none', cursor: 'pointer' }} className="select">
           <option value="">Filter by Category</option>
           {categories.map((category) => (
             <option key={category.id} value={category.name}>
@@ -89,7 +89,7 @@ const HomePage = ({ tab = 0 }) => {
           ))}
         </select>
 
-        <select onChange={(e) => onFilterChange('priority', e.target.value)} style={{ margin: '8px 10px', border: 'none', cursor: 'pointer' }}>
+        <select onChange={(e) => onFilterChange('priority', e.target.value)} style={{ margin: '8px 10px', border: 'none', cursor: 'pointer' }} className="select">
           <option value="">Filter by Priority</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
