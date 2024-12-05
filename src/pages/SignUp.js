@@ -7,7 +7,7 @@ import {
     CircularProgress,
     Box,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/SignUp.scss';
 import signupImage from '../assets/bg-login.avif';
@@ -147,6 +147,9 @@ const SignUp = () => {
                         {loading ? <CircularProgress size={24} /> : 'Sign Up'}
                     </Button>
                 </form>
+                <Typography variant="body2" align="center" style={{ marginTop: '16px' }}>
+                    Already have an account? <Link to="/">Sign In</Link>
+                </Typography>
 
                 <Snackbar
                     open={snackbarOpen}

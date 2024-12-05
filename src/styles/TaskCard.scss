@@ -1,3 +1,17 @@
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .task-card {
     padding: 8px;
     margin: 8px;
@@ -6,6 +20,11 @@
     background-color: var(--secondary-color) !important;
     color: var(--font-color) !important;
     transition: transform 0.2s, box-shadow 0.2s;
+
+    &.highlight {
+        border: 2px solid red;
+        animation: pulse 1.5s infinite;
+    }
 }
 
 .task-card:hover {

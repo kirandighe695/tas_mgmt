@@ -100,7 +100,7 @@ const HomePage = ({ tab = 0 }) => {
           className="search inputs font14"
           sx={{
             height: '40px',
-            margin: '0px 8px 8px 0',
+            margin: '2px 8px 2px 0',
             borderRadius: '5px',
             '& .MuiInputBase-root': {
               height: '40px',
